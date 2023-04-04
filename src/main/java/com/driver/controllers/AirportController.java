@@ -14,8 +14,7 @@ import java.util.Date;
 @RestController
 public class AirportController {
 
-    @Autowired
-    AirportService airportService;
+    AirportService airportService = new AirportService();
 
     @PostMapping("/add_airport")
     public String addAirport(@RequestBody Airport airport){
@@ -23,8 +22,8 @@ public class AirportController {
         //Simply add airport details to your database
         //Return a String message "SUCCESS"
 
-        String ans = airportService.addAirport(airport);
-        return ans;
+        airportService.addAirport(airport);
+        return "SUCCESS";
     }
 
     @GetMapping("/get-largest-aiport")
@@ -43,7 +42,7 @@ public class AirportController {
         //Find the duration by finding the shortest flight that connects these 2 cities directly
         //If there is no direct flight between 2 cities return -1.
 
-        double ans = getShortestDurationOfPossibleBetweenTwoCities(fromCity, toCity);
+        double ans = airportService.getShortestDurationOfPossibleBetweenTwoCities(fromCity, toCity);
         return ans;
     }
 

@@ -13,11 +13,10 @@ import java.util.Date;
 @Service
 public class AirportService {
 
-    @Autowired
-    AirportRepository airportRepository;
+    AirportRepository airportRepository = new AirportRepository();
 
-    public String addAirport(Airport airport){
-        return airportRepository.newAirport(airport);
+    public void addAirport(Airport airport){
+        airportRepository.newAirport(airport);
     }
 
     public String getLargestAirportName(){

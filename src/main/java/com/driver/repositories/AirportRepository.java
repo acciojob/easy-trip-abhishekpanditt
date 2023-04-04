@@ -12,11 +12,8 @@ import java.util.*;
 public class AirportRepository {
 
     public HashMap<String, Airport> airportDb = new HashMap<>();
-
     public HashMap<Integer, Flight> flightDb = new HashMap<>();
-
     public HashMap<Integer, List<Integer>> flightToPassengerDb = new HashMap<>();
-
     public HashMap<Integer, Passenger> passengerDb = new HashMap<>();
 
     public AirportRepository() {
@@ -27,10 +24,8 @@ public class AirportRepository {
         this.passengerDb = new HashMap<Integer, Passenger>();
     }
 
-    public String newAirport(Airport airport){
-
+    public void newAirport(Airport airport){
         airportDb.put(airport.getAirportName(), airport);
-        return "SUCCESS";
     }
 
     public String largestAirport(){
@@ -62,7 +57,7 @@ public class AirportRepository {
             }
         }
 
-        if(distance==1000000000){
+        if(distance == 1000000000){
             return -1;
         }
         return distance;
@@ -175,8 +170,9 @@ public class AirportRepository {
     public int revenue(Integer flightId){
 
         int noOfPeopleBooked = flightToPassengerDb.get(flightId).size();
-        int variableFare = (noOfPeopleBooked*(noOfPeopleBooked+1))*25;
-        int fixedFare = 3000*noOfPeopleBooked;
+        if(noOfPeopleBooked == 1) return 3000;
+        int variableFare = (noOfPeopleBooked*(noOfPeopleBooked+1)) * 25;
+        int fixedFare = 3000 * noOfPeopleBooked;
         int totalFare = variableFare + fixedFare;
 
         return totalFare;
@@ -185,6 +181,6 @@ public class AirportRepository {
     public String newPassenger(Passenger passenger){
 
         passengerDb.put(passenger.getPassengerId(),passenger);
-        return null;
+        return "SUCCESS";
     }
 }
